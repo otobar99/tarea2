@@ -1,16 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
+package tarea2;
 
-package com.mycompany.tarea2;
-
-/**
- *
- * @author USUARIO
- */
 public class Tarea2 {
-
     public static void main(String[] args) {
-        System.out.println("Hola Mundo!");
+        Evaluacion_Proceso prueba = new Evaluacion_Proceso();
+        prueba.setVisible(true);
+        prueba.cargarEvaluacion(1);
     }
 }
+        
