@@ -1,12 +1,15 @@
 package tarea2;
 
+import java.time.Instant;
 public class Evaluacion_Proceso extends javax.swing.JFrame {
     
     private Evaluacion evaluacion;
     private Pregunta_VF[] preguntas;
     private int indice;
     private int total_preguntas;
+    private long seg;
     public Evaluacion_Proceso() {
+        this.seg = Instant.now().getEpochSecond();
         initComponents();
     }
     @SuppressWarnings("unchecked")
@@ -146,6 +149,25 @@ public class Evaluacion_Proceso extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    public void Tiempo(){
+        long rest = this.evaluacion.getTiempo()-(Instant.now().getEpochSecond()-this.seg);
+        txtTiempo.setText((rest/60)+":"+(rest%60));
+        if(rest<=0){
+            guardarRespuestaUsuario();
+            int puntaje = 0;
+            for(Pregunta_VF p: preguntas){
+                if(p.getRespuestaUsuario() == p.getRespuestaCorrecta()){
+                    puntaje += p.getPuntaje();
+                }
+            }
+            evaluacion.setPuntajeObtenido(puntaje);
+            this.dispose();
+            Evaluacion_Finalizar resultado = new Evaluacion_Finalizar();
+            resultado.Resultado(this.preguntas, this.evaluacion);
+            resultado.setVisible(true);
+        }
+    } 
+    
     public void cargarEvaluacion(int idEvaluacion) {
         EvaluacionCRUD evaluacionDAO = new EvaluacionCRUD(); // Instanciar tu DAO
         this.evaluacion = evaluacionDAO.obtenerEvaluacionPorId(idEvaluacion);
@@ -153,8 +175,12 @@ public class Evaluacion_Proceso extends javax.swing.JFrame {
             this.total_preguntas = this.evaluacion.getCantidadPreguntasVF() + this.evaluacion.getCantidadPreguntasAlternativas();
             this.preguntas = evaluacionDAO.obtenerPreguntasPorEvaluacion(this.evaluacion.getIdEvaluacion(), total_preguntas);
             indice = 0;
+            Tiempo();
             mostrarPregunta();
         } else {
+            Intro intro = new Intro();
+            intro.TablaEvaluacionGUI();
+            intro.setVisible(true);
             System.out.println("Error: Evaluación no encontrada con ID: " + idEvaluacion);
             javax.swing.JOptionPane.showMessageDialog(this, "La evaluación seleccionada no existe.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             this.dispose();
@@ -162,6 +188,7 @@ public class Evaluacion_Proceso extends javax.swing.JFrame {
     }
     
     private void mostrarPregunta() {
+        Tiempo();
         if (this.indice >= 0 && this.indice < this.total_preguntas) {
             if(this.indice == 0){
                 btnAnterior.setVisible(false);

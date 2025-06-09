@@ -84,6 +84,10 @@ public class Evaluacion_Finalizar extends javax.swing.JFrame {
 
     private void txtVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVolverActionPerformed
         // TODO add your handling code here:
+        Intro intro = new Intro();
+        intro.setVisible(true);
+        intro.TablaEvaluacionGUI();
+        this.dispose();
     }//GEN-LAST:event_txtVolverActionPerformed
 
     /**

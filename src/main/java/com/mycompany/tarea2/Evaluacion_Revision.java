@@ -96,6 +96,11 @@ public class Evaluacion_Revision extends javax.swing.JFrame {
         });
 
         btnTerminar.setText("Terminar");
+        btnTerminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTerminarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -157,6 +162,14 @@ public class Evaluacion_Revision extends javax.swing.JFrame {
         indice++;
         MostrarPregunta();
     }//GEN-LAST:event_btnSiguienteActionPerformed
+
+    private void btnTerminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminarActionPerformed
+        // TODO add your handling code here:
+        Intro intro = new Intro();
+        intro.setVisible(true);
+        intro.TablaEvaluacionGUI();
+        this.dispose();
+    }//GEN-LAST:event_btnTerminarActionPerformed
 
     /**
      * @param args the command line arguments

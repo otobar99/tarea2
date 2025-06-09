@@ -46,6 +46,71 @@ public class EvaluacionCRUD {
         return evaluacion;
     }
     
+    public Evaluacion[] obtenerEvaluaciones() {
+        int contador = 0;
+        String sql = "SELECT COUNT(*) FROM evaluaciones";
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = Conexion.conectar();
+            if (conn != null) {
+                pstmt = conn.prepareStatement(sql);
+                rs = pstmt.executeQuery();
+                if (rs.next()) {
+                    contador = rs.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al obtener cantidad de evaluaciones: " + e.getMessage());
+        } finally {
+            Conexion.cerrarConexion();
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+            } catch (SQLException e) {
+                System.err.println("Error al cerrar recursos en cantidad de evaluaciones: " + e.getMessage());
+            }
+        }
+        Evaluacion[] evaluaciones = new Evaluacion[contador];
+        int i=0;
+        sql = "SELECT id_evaluacion, cantidad_preguntas_vf, cantidad_preguntas_alternativas, " +
+                     "tiempo, puntaje_total " +
+                     "FROM evaluaciones";
+        conn = null;
+        pstmt = null;
+        rs = null;
+
+        try {
+            conn = Conexion.conectar();
+            if (conn != null) {
+                pstmt = conn.prepareStatement(sql);
+                rs = pstmt.executeQuery();
+
+                while(rs.next()) { // Si se encuentra un resultado
+                    evaluaciones[i++] = new Evaluacion(
+                        rs.getInt("id_evaluacion"),
+                        rs.getInt("cantidad_preguntas_vf"),
+                        rs.getInt("cantidad_preguntas_alternativas"),
+                        rs.getInt("tiempo"),
+                        rs.getInt("puntaje_total")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al obtener evaluaciones" + e.getMessage());
+        } finally {
+            Conexion.cerrarConexion();
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+            } catch (SQLException e) {
+                System.err.println("Error al cerrar recursos en obtenerEvaluaciones: " + e.getMessage());
+            }
+        }
+        return evaluaciones;
+    }
 
     public Pregunta_VF[] obtenerPreguntasPorEvaluacion(int idEvaluacion, int n_preguntas) {
         Pregunta_VF[] preguntas = new Pregunta_VF[n_preguntas];
