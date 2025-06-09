@@ -1,6 +1,9 @@
 package tarea2;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.Instant;
+import javax.swing.Timer;
 public class Evaluacion_Proceso extends javax.swing.JFrame {
     
     private Evaluacion evaluacion;
@@ -10,6 +13,13 @@ public class Evaluacion_Proceso extends javax.swing.JFrame {
     private long seg;
     public Evaluacion_Proceso() {
         this.seg = Instant.now().getEpochSecond();
+        // Timer that updates every second
+        Timer timer = new Timer(1000, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Tiempo();
+            }
+        });
+        timer.start();
         initComponents();
     }
     @SuppressWarnings("unchecked")
