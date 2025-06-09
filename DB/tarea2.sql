@@ -62,6 +62,14 @@ CREATE TABLE `evaluaciones` (
 LOCK TABLES `evaluaciones` WRITE;
 /*!40000 ALTER TABLE `evaluaciones` DISABLE KEYS */;
 INSERT INTO `evaluaciones` VALUES (1,2,4,900,100);
+
+INSERT INTO evaluaciones
+(id_evaluacion, cantidad_preguntas_vf, cantidad_preguntas_alternativas, tiempo, puntaje_total)
+VALUES(3, 4, 2, 900, 100);
+INSERT INTO evaluaciones
+(id_evaluacion, cantidad_preguntas_vf, cantidad_preguntas_alternativas, tiempo, puntaje_total)
+VALUES(2, 3, 7, 900, 100);
+
 /*!40000 ALTER TABLE `evaluaciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -92,6 +100,17 @@ CREATE TABLE `preguntasalternativas` (
 LOCK TABLES `preguntasalternativas` WRITE;
 /*!40000 ALTER TABLE `preguntasalternativas` DISABLE KEYS */;
 INSERT INTO `preguntasalternativas` VALUES (1,'¿Cuál de las siguientes sentencias Java es la forma correcta de declarar una variable entera llamada \"edad\" con un valor inicial de 25?','Aplicar','int edad = 25;','Integer edad = 25;','edad = 25;','new int edad = 25;',0,20),(1,'Dado el siguiente fragmento de código: String s = \"Hola\"; s += \" Mundo\"; ¿Cuál será el valor final de \"s\"?','Analizar','\"Hola\"','\"Mundo\"','\"Hola Mundo\"','Error de compilación',2,20),(1,'Considerando la gestión de la memoria en Java, ¿cuál es el propósito principal del \"Garbage Collector\"?','Evaluar','Liberar memoria RAM de forma manual para el programador.','Administrar la memoria del disco duro para archivos del sistema.','Automáticamente liberar memoria ocupada por objetos que ya no están referenciados.','Optimizar la velocidad de ejecución de la CPU.',2,20),(1,'Si estás diseñando una aplicación que necesita almacenar una colección de elementos únicos y garantizar un rendimiento eficiente para búsquedas y adiciones, ¿qué tipo de estructura de datos de Java Collection Framework sería la más adecuada?','Crear','ArrayList','LinkedList','HashSet','HashMap',2,20);
+
+INSERT INTO preguntasalternativas (id_evaluacion, enunciado, nivel_taxonomico, opcion_a, opcion_b, opcion_c, opcion_d, respuesta_correcta, puntaje) VALUES(2, '¿Qué palabra clave en Java se utiliza para definir una clase?', 'Recordar', 'function', 'def', 'class', 'public', 2, 10);
+INSERT INTO preguntasalternativas (id_evaluacion, enunciado, nivel_taxonomico, opcion_a, opcion_b, opcion_c, opcion_d, respuesta_correcta, puntaje) VALUES(2, '¿Cuál es el propósito del método "main" en una aplicación Java?', 'Comprender', 'Ejecutar código de prueba', 'Iniciar la ejecución del programa', 'Definir variables globales', 'Mostrar mensajes por pantalla', 1, 15);
+INSERT INTO preguntasalternativas (id_evaluacion, enunciado, nivel_taxonomico, opcion_a, opcion_b, opcion_c, opcion_d, respuesta_correcta, puntaje) VALUES(2, '¿Cuál de las siguientes opciones representa correctamente la creación de un objeto de la clase Persona?', 'Aplicar', 'Persona = new Persona();', 'new Persona();', 'Persona p = Persona();', 'Persona p = new Persona();', 3, 20);
+INSERT INTO preguntasalternativas (id_evaluacion, enunciado, nivel_taxonomico, opcion_a, opcion_b, opcion_c, opcion_d, respuesta_correcta, puntaje) VALUES(2, 'Dado el siguiente código, ¿qué problema tiene? "int numero = "cinco";"', 'Analizar', 'Ninguno, es válido', 'Error de tipo: se asigna una cadena a un entero', 'Error de sintaxis por punto y coma', 'Falta el modificador static', 1, 20);
+INSERT INTO preguntasalternativas (id_evaluacion, enunciado, nivel_taxonomico, opcion_a, opcion_b, opcion_c, opcion_d, respuesta_correcta, puntaje) VALUES(2, '¿Cuál de las siguientes implementaciones representa mejor el uso de herencia en Java?', 'Evaluar', 'class Ave {} class Gato extends Ave {}', 'class Animal {} class Perro extends Animal {}', 'interface Volador {} class Pato implements Volador {}', 'class Vehiculo {} class Rueda extends Vehiculo {}', 1, 20);
+INSERT INTO preguntasalternativas (id_evaluacion, enunciado, nivel_taxonomico, opcion_a, opcion_b, opcion_c, opcion_d, respuesta_correcta, puntaje) VALUES(2, '¿Cuál de las siguientes estructuras es adecuada para encapsular datos y comportamientos relacionados en Java?', 'Sintetizar', 'Una clase', 'Un método', 'Un paquete', 'Un archivo', 0, 15);
+INSERT INTO preguntasalternativas (id_evaluacion, enunciado, nivel_taxonomico, opcion_a, opcion_b, opcion_c, opcion_d, respuesta_correcta, puntaje) VALUES(2, '¿Cuál es la forma correcta de usar un bucle "for" en Java para imprimir los números del 1 al 5?', 'Aplicar', 'for(int i=1; i<=5; i++) { System.out.println(i); }', 'for(i=1; i<5; i++) { print(i); }', 'for(int i=0; i<5; ++i) { print(i+1); }', 'for(int i=1; i<=5; i++) { print(i); }', 0, 20);
+INSERT INTO preguntasalternativas (id_evaluacion, enunciado, nivel_taxonomico, opcion_a, opcion_b, opcion_c, opcion_d, respuesta_correcta, puntaje) VALUES(3, '¿Qué tipo de dato se utiliza para almacenar valores booleanos en Java?', 'Recordar', 'int', 'boolean', 'char', 'String', 1, 10);
+INSERT INTO preguntasalternativas (id_evaluacion, enunciado, nivel_taxonomico, opcion_a, opcion_b, opcion_c, opcion_d, respuesta_correcta, puntaje) VALUES(3, '¿Qué describe mejor el concepto de "sobrecarga de métodos" en Java?', 'Comprender', 'Tener métodos con el mismo nombre pero diferentes parámetros', 'Usar métodos de una clase padre', 'Llamar a un método dentro de otro método', 'Reutilizar código en diferentes clases', 0, 15);
+
 /*!40000 ALTER TABLE `preguntasalternativas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,6 +137,15 @@ CREATE TABLE `preguntasvf` (
 LOCK TABLES `preguntasvf` WRITE;
 /*!40000 ALTER TABLE `preguntasvf` DISABLE KEYS */;
 INSERT INTO `preguntasvf` VALUES (1,'Java es un lenguaje de programación orientado a objetos.','Recordar',1,10),(1,'Un bucle \"for\" en Java se utiliza principalmente para iterar un número desconocido de veces.','Entender',0,10);
+
+INSERT INTO preguntasvf (id_evaluacion, enunciado, nivel_taxonomico, respuesta_correcta, puntaje) VALUES(2, 'En Java, la palabra clave final se utiliza para declarar constantes que no pueden cambiar su valor.', 'Recordar', 1, 10);
+INSERT INTO preguntasvf (id_evaluacion, enunciado, nivel_taxonomico, respuesta_correcta, puntaje) VALUES(2, 'En Java, una clase que hereda de otra clase debe redefinir todos los métodos, incluyendo los métodos private', 'Comprender', 0, 10);
+INSERT INTO preguntasvf (id_evaluacion, enunciado, nivel_taxonomico, respuesta_correcta, puntaje) VALUES(2, 'Si una clase en Java implementa una interfaz, entonces debe proporcionar implementaciones para todos los métodos definidos en esa interfaz, a menos que la clase sea abstracta.', 'Aplicar', 1, 10);
+INSERT INTO preguntasvf (id_evaluacion, enunciado, nivel_taxonomico, respuesta_correcta, puntaje) VALUES(3, 'En Java, una variable declarada como "final" puede cambiar su valor una vez inicializada.', 'Recordar', 0, 10);
+INSERT INTO preguntasvf (id_evaluacion, enunciado, nivel_taxonomico, respuesta_correcta, puntaje) VALUES(3, 'Los arreglos en Java pueden cambiar su tamaño después de ser creados.', 'Comprender', 0, 15);
+INSERT INTO preguntasvf (id_evaluacion, enunciado, nivel_taxonomico, respuesta_correcta, puntaje) VALUES(3, 'Una excepción no controlada (unchecked exception) en Java debe manejarse obligatoriamente con try-catch o throws.', 'Aplicar', 0, 20);
+INSERT INTO preguntasvf (id_evaluacion, enunciado, nivel_taxonomico, respuesta_correcta, puntaje) VALUES(3, 'Una subclase en Java puede acceder directamente a los miembros privados de su clase padre.', 'Analizar', 0, 20);
+
 /*!40000 ALTER TABLE `preguntasvf` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
